@@ -1,6 +1,6 @@
 import graph
 import math
-
+import random
 
 def noir(haut, larg):
     """
@@ -57,12 +57,28 @@ def numero_bande(x, larg_bande):
     return int(x / larg_bande)
 
 
-def bande_est_noire(numero_bande):
+def bande_est_noire(nv):
     """
     Determine si une bande est noire ou blanche a partir de
     son numero
     """
-    return numero_bande % 2 == 1
+    return nv % 2 == 1
+
+
+def rayures_verticales_naif(hauteur, largeur, larg_bande):
+    """
+    Dessine des rayures verticales de largeur larg_bande
+    alternant blanc et noir sur une fenetre de taille
+    hauteur x largeur.
+    Il n'y a aucune condition necessaire pour larg_bande.
+
+    **Algorithme naif**
+    """
+    for x in range(largeur):
+        if bande_est_noire(numero_bande(x, larg_bande)):
+            for y in range(hauteur):
+                graph.plot(y,x)
+    return
 
 
 def rayures_verticales(hauteur, largeur, larg_bande):
@@ -78,7 +94,109 @@ def rayures_verticales(hauteur, largeur, larg_bande):
     # on dessine les bandes (<=> rectangles) NOIRES
     for ind in range(1, nb_total_bandes, 2):
         rectangle_noir(hauteur, largeur, 0, hauteur,
-                       larg_bande*ind, min(larg_bande*ind + larg_bande, largeur))
+                       larg_bande*ind, min(larg_bande*ind + larg_bande,
+                                           largeur))
+
+    return
+
+
+def numero_case(x, y, cote):
+    """
+    Trouver le numero de la case du pixel (x,y)
+    si le graph est en forme de damier noir et blanc et que
+    les cases sont numerotees par leur numero vertical et horizontal
+    en commencant par 0
+    """
+    nv = int(x / cote)
+    nh = int(y / cote)
+    return nv, nh
+
+
+def case_est_noire(nv, nh):
+    """
+    Determine si une case est noire ou blanche a partir de
+    ses numeros nv et nh
+    """
+    return (nv % 2 == 1 and nh % 2 == 0) or (nv % 2 == 0 and nh % 2 == 1)
+
+
+def damier_naif(hauteur, largeur, cote):
+    """
+    Dessine un damier de case carees de largeur cote
+    alternant blanc et noir sur une fenetre de taille
+    hauteur x largeur.
+    Il n'y a aucune condition necessaire pour cote et la premiere case
+    est blanche.
+
+    **Algorithme naif**
+    """
+    for x in range(largeur):
+        for y in range(hauteur):
+            nv, nh = numero_case(x, y, cote)
+            if case_est_noire(nv, nh):
+                graph.plot(y,x)
+    return
+
+
+def damier(hauteur, largeur, cote):
+    """
+    Dessine un damier de case carees de largeur cote
+    alternant blanc et noir sur une fenetre de taille
+    hauteur x largeur.
+    Il n'y a aucune condition necessaire pour cote et la premiere case
+    est blanche.
+    """
+    # on calcule le nombre cases horizontal
+    nb_hor = math.ceil(largeur / cote)
+    # on calcule le nombre cases vertical
+    nb_ver = math.ceil(hauteur / cote)
+
+    # on dessine les cases (<=> rectangles) NOIRES
+    for indv in range(nb_ver):
+        for indh in range(nb_hor):
+            if case_est_noire(indv, indh):
+                rectangle_noir(hauteur, largeur,
+                               indv*cote, min(indv*cote+cote, hauteur),
+                               indh*cote, min(indh*cote+cote, largeur))
+
+    return
+
+
+def rectangle_random(haut, larg, ymin, ymax, xmin, xmax):
+    """
+    Colorie un rectangle de couleur aleatoire compris entre (xmin, xmax)
+    horizontalement et (ymin, ymax) verticalement (fond blanc)
+    """
+    couleurs = ["black", "white", "red", "green", "blue", "yellow",
+                "cyan", "magenta","orange", "darkgrey"]
+    # on choisit une couleur au hasard
+    c = couleurs[int(random.random()*len(couleurs))]
+    for y in range(ymin, ymax):
+        for x in range(xmin, xmax):
+            graph.plot(y, x, c)
+    return
+
+
+def damier_colore(hauteur, largeur, cote):
+    """
+    Dessine un damier colore de case carees de largeur cote
+    alternant blanc et noir sur une fenetre de taille
+    hauteur x largeur.
+    Il n'y a aucune condition necessaire pour cote et la premiere case
+    est blanche.
+    """
+    # on calcule le nombre cases horizontal
+    nb_hor = math.ceil(largeur / cote)
+    # on calcule le nombre cases vertical
+    nb_ver = math.ceil(hauteur / cote)
+
+    # on dessine les cases (<=> rectangles) NOIRES
+    for indv in range(nb_ver):
+        for indh in range(nb_hor):
+            if case_est_noire(indv, indh):
+                rectangle_random(hauteur, largeur,
+                               indv*cote, min(indv*cote+cote, hauteur),
+                               indh*cote, min(indh*cote+cote, largeur))
 
     return
 
@@ -96,6 +214,8 @@ if __name__=="__main__":
     print("    4. numero bande")
     print("    5. condition noire")
     print("    6. rayures verticales")
+    print("    7. damier")
+    print("    8. damier colore")
     print("  100. Tout afficher")
     print("")
     reponse = int(input("Choisissez quelle reponse voir : "))
@@ -130,7 +250,18 @@ if __name__=="__main__":
         print("Le numero de bande doit etre impair :)")
     if reponse == 6 or reponse == 100:
         graph.ouvre_fenetre(500, 800)
-        rayures_verticales(500, 800, 150)
+        #rayures_verticales(500, 800, 150)
+        rayures_verticales_naif(500, 800, 150)
         graph.attend_fenetre()
-    if reponse < 0 or (reponse > 6 and not reponse == 100):
+    if reponse == 7 or reponse == 100:
+        graph.ouvre_fenetre(500, 800)
+        #damier_naif(500, 800, 75)
+        damier(500, 800, 75)
+        graph.attend_fenetre()
+    if reponse == 8 or reponse == 100:
+        graph.ouvre_fenetre(500, 800)
+        damier_colore(500, 800, 75)
+        graph.attend_fenetre()
+
+    if reponse < 0 or (reponse > 8 and not reponse == 100):
         print("Mauvais choix. Bye bye")
