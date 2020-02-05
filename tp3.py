@@ -1,5 +1,6 @@
 import random
 
+
 def sapin_decore(hauteur):
     """
     Creation d'un sapin compose de `*` decore de `O`.
@@ -21,9 +22,11 @@ def sapin_decore(hauteur):
     print()
     return
 
+
 # On affiche notre sapin decore :
 print("******* Bonnes fetes **********")
 sapin_decore(11)
+
 
 def myst():
     """
@@ -38,7 +41,7 @@ def myst():
     print("===========================================")
     print("L'ordinateur a choisi un nombre entre 0 et 99.")
     print("A vous de le trouver !\n")
-    while not nombre_myst==nombre_util:
+    while not nombre_myst == nombre_util:
         nombre_util = int(input("Choissisez un nombre entre 0 et 99 : "))
         if nombre_util > nombre_myst:
             print("Trop grand !")
@@ -46,5 +49,6 @@ def myst():
             print("Trop petit !")
     print("\n        Felicitations !! Vous avez trouve le bon nombre ")
     return
+
 
 myst()
