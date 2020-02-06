@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import graph
 import math
 import random
@@ -148,9 +150,9 @@ def damier(hauteur, largeur, cote):
     est blanche.
     """
     # on calcule le nombre cases horizontal
-    nb_hor = math.ceil(largeur / cote)
+    nb_hor = int(math.ceil(largeur / cote))
     # on calcule le nombre cases vertical
-    nb_ver = math.ceil(hauteur / cote)
+    nb_ver = int(math.ceil(hauteur / cote))
 
     # on dessine les cases (<=> rectangles) NOIRES
     for indv in range(nb_ver):
@@ -262,8 +264,8 @@ if __name__ == "__main__":
         graph.attend_fenetre()
     if reponse == 7 or reponse == 100:
         graph.ouvre_fenetre(500, 800)
-        # damier_naif(500, 800, 75)
-        damier(500, 800, 75)
+        damier_naif(500, 800, 75)
+        #damier(500, 800, 75)
         graph.attend_fenetre()
     if reponse == 8 or reponse == 100:
         graph.ouvre_fenetre(500, 800)

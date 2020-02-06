@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 """Interface graphique basée sur tkinter, non événementielle.
 
 Version 0.19a
