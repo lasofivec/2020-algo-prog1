@@ -2,6 +2,7 @@ import graph
 import math
 import random
 
+
 def noir(haut, larg):
     """
     Creation d'une fenetre __noire__ 400x600
@@ -77,7 +78,7 @@ def rayures_verticales_naif(hauteur, largeur, larg_bande):
     for x in range(largeur):
         if bande_est_noire(numero_bande(x, larg_bande)):
             for y in range(hauteur):
-                graph.plot(y,x)
+                graph.plot(y, x)
     return
 
 
@@ -134,7 +135,7 @@ def damier_naif(hauteur, largeur, cote):
         for y in range(hauteur):
             nv, nh = numero_case(x, y, cote)
             if case_est_noire(nv, nh):
-                graph.plot(y,x)
+                graph.plot(y, x)
     return
 
 
@@ -168,7 +169,7 @@ def rectangle_random(haut, larg, ymin, ymax, xmin, xmax):
     horizontalement et (ymin, ymax) verticalement (fond blanc)
     """
     couleurs = ["black", "white", "red", "green", "blue", "yellow",
-                "cyan", "magenta","orange", "darkgrey"]
+                "cyan", "magenta", "orange", "darkgrey"]
     # on choisit une couleur au hasard
     c = couleurs[int(random.random()*len(couleurs))]
     for y in range(ymin, ymax):
@@ -195,15 +196,15 @@ def damier_colore(hauteur, largeur, cote):
         for indh in range(nb_hor):
             if case_est_noire(indv, indh):
                 rectangle_random(hauteur, largeur,
-                               indv*cote, min(indv*cote+cote, hauteur),
-                               indh*cote, min(indh*cote+cote, largeur))
+                                 indv*cote, min(indv*cote+cote, hauteur),
+                                 indh*cote, min(indh*cote+cote, largeur))
 
     return
 
+
 # ..............................................................................
 # Tests de nos fonctions
-
-if __name__=="__main__":
+if __name__ == "__main__":
 
     print(" ==== TP3 ex 3 ====")
     print(" Questions: ")
@@ -243,19 +244,25 @@ if __name__=="__main__":
         graph.attend_fenetre()
     if reponse == 4 or reponse == 100:
         # Question 4
-        print("2.5 se trouve a la " + str(numero_bande(2.5, 2)) + "e bande de grosseur 2")
-        print("0.5 se trouve a la " + str(numero_bande(0.5, 2)) + "e bande de grosseur 2")
-        print("5.1 se trouve a la " + str(numero_bande(5.1, 2)) + "e bande de grosseur 2")
+        print("Quelques exemples:")
+        for ii in range(5):
+            x = random.random() * 20  # nombre entre 0 et 20
+            larg_bande = random.random() * 5 + 1  # nombre entre 1 et 6
+            nb = numero_bande(x, larg_bande)
+            print(str(x) + " se trouve a la " + str(nb) + "e bande de largeur"
+                  + str(larg_bande))
+        print()
     if reponse == 5 or reponse == 100:
         print("Le numero de bande doit etre impair :)")
+        print("")
     if reponse == 6 or reponse == 100:
         graph.ouvre_fenetre(500, 800)
-        #rayures_verticales(500, 800, 150)
+        # rayures_verticales(500, 800, 150)
         rayures_verticales_naif(500, 800, 150)
         graph.attend_fenetre()
     if reponse == 7 or reponse == 100:
         graph.ouvre_fenetre(500, 800)
-        #damier_naif(500, 800, 75)
+        # damier_naif(500, 800, 75)
         damier(500, 800, 75)
         graph.attend_fenetre()
     if reponse == 8 or reponse == 100:
