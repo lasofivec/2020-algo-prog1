@@ -246,10 +246,10 @@ if __name__ == "__main__":
         # Question 4
         print("Quelques exemples:")
         for ii in range(5):
-            x = random.random() * 20  # nombre entre 0 et 20
-            larg_bande = random.random() * 5 + 1  # nombre entre 1 et 6
+            x = int(random.random() * 20)  # nombre entre 0 et 20
+            larg_bande = int(random.random() * 5 + 1)  # nombre entre 1 et 6
             nb = numero_bande(x, larg_bande)
-            print(str(x) + " se trouve a la " + str(nb) + "e bande de largeur"
+            print(str(x) + " se trouve a la " + str(nb) + "e bande de largeur "
                   + str(larg_bande))
         print()
     if reponse == 5 or reponse == 100:
