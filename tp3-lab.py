@@ -189,9 +189,9 @@ def damier_colore(hauteur, largeur, cote):
     est blanche.
     """
     # on calcule le nombre cases horizontal
-    nb_hor = math.ceil(largeur / cote)
+    nb_hor = int(math.ceil(largeur / cote)) + 1
     # on calcule le nombre cases vertical
-    nb_ver = math.ceil(hauteur / cote)
+    nb_ver = int(math.ceil(hauteur / cote)) + 1
 
     # on dessine les cases (<=> rectangles) NOIRES
     for indv in range(nb_ver):
