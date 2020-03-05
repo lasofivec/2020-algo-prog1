@@ -4,7 +4,7 @@ import graph
 import tp4
 
 # -- Question 1 ----------------------------------------------------------------
-laby = Labyrinthe.creer(11,15)
+laby = Labyrinthe.creer(11, 15)
 for ligne in laby:
     print(ligne)
 
@@ -25,9 +25,10 @@ def entree(laby):
     for i in range(len(laby)):
         for j in range(len(laby[i])):
             if laby[i][j] == 2:
-                return i, j # pas besoin de continuer, on renvoit le resultat
+                return i, j  # pas besoin de continuer, on renvoit le resultat
     print("Erreur: pas de 2 dans la liste de listes laby. \n laby = \n ", laby)
     return None
+
 
 def sortie(laby):
     """
@@ -38,12 +39,14 @@ def sortie(laby):
     for i in range(len(laby)):
         for j in range(len(laby[i])):
             if laby[i][j] == 3:
-                return i, j # pas besoin de continuer, on renvoit le resultat
+                return i, j  # pas besoin de continuer, on renvoit le resultat
     print("Erreur: pas de 3 dans la liste de listes laby. \n laby = \n ", laby)
     return None
 
+
 print("La case contenant 2 se trouve a la position: ", entree(laby))
 print("La case contenant 3 se trouve a la position: ", sortie(laby))
+
 
 # -- Question 4 ----------------------------------------------------------------
 def color_rectangle(ymin, ymax, xmin, xmax, c):
@@ -55,6 +58,7 @@ def color_rectangle(ymin, ymax, xmin, xmax, c):
         for x in range(xmin, xmax):
             graph.plot(y, x, couleur=c)
     return
+
 
 def dessine_labyrinthe(laby, taille):
     """
@@ -71,6 +75,7 @@ def dessine_labyrinthe(laby, taille):
     je, ie = sortie(laby)
     color_rectangle(je*taille, (je+1)*taille, ie*taille, (ie+1)*taille, "red")
     return
+
 
 dessine_labyrinthe(laby, 20)
 graph.attend_fenetre()
