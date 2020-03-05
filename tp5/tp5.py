@@ -89,3 +89,23 @@ for ligne in laby2:
     print("  ", ligne)
 print("  Entree du labyrinthe aleatoire = ", entree(laby2))
 print("  Entree du labyrinthe aleatoire = ", sortie(laby2))
+
+
+# -- Question 2 ----------------------------------------------------------------
+# .. 2.1 Taille labyrinthe .....................................................
+# Fonctions du TP4:
+def nb_lignes(liste_de_liste):
+    return len(liste_de_liste)
+
+
+def nb_colonnes(liste_de_liste):
+    return len(liste_de_liste[0])
+
+
+def taille_laby(laby):
+    return nb_lignes(laby), nb_colonnes(laby)
+
+
+print("")
+print("* Question 2.1 *")
+print("  Nombre de lignes et colonnes du laby aleatoire:", taille_laby(laby2))
