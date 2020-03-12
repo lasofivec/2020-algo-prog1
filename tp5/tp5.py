@@ -94,18 +94,69 @@ print("  Entree du labyrinthe aleatoire = ", sortie(laby2))
 # -- Question 2 ----------------------------------------------------------------
 # .. 2.1 Taille labyrinthe .....................................................
 # Fonctions du TP4:
-def nb_lignes(liste_de_liste):
+def get_nb_lignes(liste_de_liste):
     return len(liste_de_liste)
 
 
-def nb_colonnes(liste_de_liste):
+def get_nb_colonnes(liste_de_liste):
     return len(liste_de_liste[0])
 
 
 def taille_laby(laby):
-    return nb_lignes(laby), nb_colonnes(laby)
+    return get_nb_lignes(laby), get_nb_colonnes(laby)
 
 
 print("")
 print("* Question 2.1 *")
 print("  Nombre de lignes et colonnes du laby aleatoire:", taille_laby(laby2))
+
+print("")
+print("* Question 2.2 *")
+print("  Nombre de lignes et colonnes du laby enonce:", taille_laby(laby1))
+
+
+# .. 2.3 Voisins labyrinthe ....................................................
+def estDedans(coords, nb_lignes, nb_colonnes):
+    if 0 <= coords[0] < nb_lignes and 0 <= coords[1] < nb_colonnes:
+        return True
+    return False
+
+
+def voisins_laby_fin(lgn, col, nb_lignes, nb_colonnes):
+    deplacements = [(1, 0), (-1, 0), (0, 1), (0, -1)]
+    liste_voisins = []
+    for i in range(4):
+        voisin = (lgn + deplacements[i][0], col + deplacements[i][1])
+        if estDedans(voisin, nb_lignes, nb_colonnes):
+            liste_voisins += [voisin]
+    return liste_voisins
+
+
+nbl, nbc = taille_laby(laby2)
+print("")
+print("* Question 2.3 *")
+print("  Voisins milieu (3, 3)  =", voisins_laby_fin(3, 3, nbl, nbc))
+print("  Voisins coin   (0, 0)  =", voisins_laby_fin(0, 0, nbl, nbc))
+print("  Voisins bords (14, 10) =", voisins_laby_fin(14, 10, nbl, nbc))
+
+
+# .. 2.4 Voisins accessibles ...................................................
+def voisins_laby_acc_1(lgn, col, laby):
+    nbl, nbc = taille_laby(laby)
+    liste_voisins = voisins_laby_fin(lgn, col, nbl, nbc)
+    voisins_acc = []
+    for v in liste_voisins:
+        if laby[v[0]][v[1]] != 0:
+            voisins_acc.append(v)
+    return voisins_acc
+
+
+def voisins_laby_acc(coords, laby):
+    return voisins_laby_acc_1(coords[0], coords[1], laby)
+
+
+print("")
+print("* Question 2.4 + 2.5 *")
+print("  Voisins accessibles de (1,5) dans laby :",
+      voisins_laby_acc((1, 5), laby1))
+
