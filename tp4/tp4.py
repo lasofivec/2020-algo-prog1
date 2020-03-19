@@ -1,7 +1,9 @@
+import graph
+
+
 ########################################
 #          Partie numero 1
 ########################################
-
 def fonctions_partie1():
     print("\n######################################")
     print("                Partie 1")
@@ -9,7 +11,7 @@ def fonctions_partie1():
 
     # question 1
     print("\n------------- question 1 ------------------")
-    lst=[5,0,50,200]
+    lst = [5, 0, 50, 200]
     print("Liste avant boucle for : ", lst)
     for i in range(len(lst)):
         lst[i] *= 2
@@ -27,7 +29,7 @@ def fonctions_partie1():
     # question 3
     print("\n------------- question 3 ------------------")
     print(">>> premiere version")
-    lst=[5,0,50,200]
+    lst = [5, 0, 50, 200]
     lst2 = lst[:]
     for i in range(len(lst)):
         lst2[i] *= 2
@@ -35,7 +37,7 @@ def fonctions_partie1():
     print("Liste lst2 : ", lst2)
 
     print(">>> deuxieme version")
-    lst=[5,0,50,200]
+    lst = [5, 0, 50, 200]
     lst2 = []
     for ele in lst:
         lst2.append(2 * ele)
@@ -48,12 +50,13 @@ def fonctions_partie1():
     x = -3
     print("Pixels voisins de ", y, x, " : ", pixels_voisins(y, x))
 
+
 def pixels_voisins(y, x):
     """
     Calcul les 4 voisins du point aux coordonnees (y,x)
     Retourne les voisins a droite gauche bas haut
     """
-    vecteur = [(0,1), (0,-1), (1,0), (-1,0)]
+    vecteur = [(0, 1), (0, -1), (1, 0), (-1, 0)]
     voisins = []
     for v in vecteur:
         voisins.append((v[0] + y, v[1] + x))
@@ -63,9 +66,6 @@ def pixels_voisins(y, x):
 ########################################
 #          Partie numero 2
 ########################################
-import graph
-
-
 def fonctions_partie2():
     print("\n######################################")
     print("                Partie 2")
@@ -122,9 +122,9 @@ def dessine_bandes1(lst, hauteur, largeur_bandes):
         for x in range(largeur):
             nb = num_bande(x, y, largeur_bandes)
             if lst[nb] == 0:
-                graph.plot(y,x)
+                graph.plot(y, x)
 
-    #graph.attend_fenetre()
+    # graph.attend_fenetre()
     return
 
 
@@ -148,7 +148,7 @@ def dessine_bandes2(lst, hauteur, largeur_bandes):
         if lst[i] == 0:
             rectangle(0, hauteur, largeur_bandes*i, largeur_bandes*(i+1))
 
-    #graph.attend_fenetre()
+    # graph.attend_fenetre()
     return
 
 
@@ -184,6 +184,7 @@ def fonctions_partie3():
     dessine_grille(lstlst, 40)
     graph.attend_fenetre()
 
+
 def nb_lignes(liste_de_liste):
     return len(liste_de_liste)
 
@@ -199,9 +200,10 @@ def taille_image(lstlst, taille):
     largeur = nc * taille
     return hauteur, largeur
 
+
 def dessine_grille(lstlst, taille):
-    h, l = taille_image(lstlst, taille)
-    graph.ouvre_fenetre(h, l)
+    ha, la = taille_image(lstlst, taille)
+    graph.ouvre_fenetre(ha, la)
 
     nl = nb_lignes(lstlst)
     nc = nb_colonnes(lstlst)
